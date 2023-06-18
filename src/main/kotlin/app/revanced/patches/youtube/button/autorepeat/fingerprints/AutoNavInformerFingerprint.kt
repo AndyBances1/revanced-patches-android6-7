@@ -8,5 +8,5 @@ object AutoNavInformerFingerprint : MethodFingerprint(
     returnType = "Z",
     access = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf(),
-    customFingerprint = { it.definingClass.endsWith("WillAutonavInformer;") }
+    customFingerprint = { methodDef, _ -> methodDef.definingClass.endsWith("WillAutonavInformer;") }
 )

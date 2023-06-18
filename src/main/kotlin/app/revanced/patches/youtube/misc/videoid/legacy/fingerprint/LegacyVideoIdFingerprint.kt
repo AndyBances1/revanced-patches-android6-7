@@ -11,6 +11,6 @@ object LegacyVideoIdFingerprint : MethodFingerprint(
     parameters = listOf("L"),
     opcodes = listOf(Opcode.INVOKE_INTERFACE),
     customFingerprint = {
-        it.definingClass.endsWith("PlaybackLifecycleMonitor;")
+            methodDef, _ -> methodDef.definingClass.endsWith("PlaybackLifecycleMonitor;")
     }
 )

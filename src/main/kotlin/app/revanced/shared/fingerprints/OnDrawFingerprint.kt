@@ -13,5 +13,5 @@ object OnDrawFingerprint : MethodFingerprint (
         Opcode.MOVE_OBJECT_FROM16,
         Opcode.MOVE_OBJECT_FROM16
     ),
-    customFingerprint = {it.name == "onDraw"}
+    customFingerprint = {methodDef, _ -> methodDef.name == "onDraw"}
 )

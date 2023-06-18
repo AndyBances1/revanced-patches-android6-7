@@ -19,7 +19,7 @@ object ScrollTopParentFingerprint : MethodFingerprint(
         Opcode.INVOKE_VIRTUAL,
         Opcode.NEW_INSTANCE
     ),
-    customFingerprint = { methodDef ->
+    customFingerprint = { methodDef, _ ->
         methodDef.name == "<init>"
     }
 )

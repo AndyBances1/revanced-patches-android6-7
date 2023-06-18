@@ -25,5 +25,5 @@ object MainstreamVideoIdFingerprint : MethodFingerprint(
         Opcode.MOVE_RESULT_OBJECT
     ),
     null,
-    { it.definingClass.endsWith("SubtitlesOverlayPresenter;") }
+    { methodDef, _ -> methodDef.definingClass.endsWith("SubtitlesOverlayPresenter;") }
 )

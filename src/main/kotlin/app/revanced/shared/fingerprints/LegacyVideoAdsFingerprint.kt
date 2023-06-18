@@ -20,7 +20,7 @@ object LegacyVideoAdsFingerprint : MethodFingerprint(
         Opcode.IPUT_WIDE,
         Opcode.CONST_4,
     ),
-    customFingerprint = { methodDef ->
+    customFingerprint = { methodDef, _ ->
         methodDef.implementation!!.instructions.any {
             ((it as? NarrowLiteralInstruction)?.narrowLiteral == 4)
         }

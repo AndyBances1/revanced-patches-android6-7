@@ -14,6 +14,6 @@ object UpdatePlayerTypeFingerprint : MethodFingerprint(
         Opcode.RETURN_VOID
     ),
     customFingerprint = {
-        it.definingClass.endsWith("YouTubePlayerOverlaysLayout;")
+            methodDef, _ -> methodDef.definingClass.endsWith("YouTubePlayerOverlaysLayout;")
     }
 )

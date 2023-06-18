@@ -15,7 +15,7 @@ object SwipeRefreshLayoutFingerprint : MethodFingerprint(
         Opcode.MOVE_RESULT,
         Opcode.RETURN
     ),
-    customFingerprint = { methodDef ->
+    customFingerprint = { methodDef, _ ->
         methodDef.definingClass == "Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;"
     }
 )

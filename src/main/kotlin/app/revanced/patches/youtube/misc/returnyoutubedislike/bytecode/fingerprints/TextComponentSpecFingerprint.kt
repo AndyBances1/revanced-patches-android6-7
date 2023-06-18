@@ -9,7 +9,7 @@ object TextComponentSpecFingerprint : MethodFingerprint(
     returnType = "L",
     access = AccessFlags.STATIC.getValue(),
     opcodes = listOf(Opcode.CMPL_FLOAT),
-    customFingerprint = { methodDef ->
+    customFingerprint = { methodDef, _ ->
         methodDef.implementation!!.instructions.any {
             ((it as? NarrowLiteralInstruction)?.narrowLiteral == 16842907)
         }
