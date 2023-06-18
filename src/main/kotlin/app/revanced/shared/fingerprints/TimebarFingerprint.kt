@@ -6,7 +6,7 @@ import org.jf.dexlib2.AccessFlags
 
 object TimebarFingerprint : MethodFingerprint(
     returnType = "V",
-    access = AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L"),
     customFingerprint = { methodDef, _ ->
         methodDef.definingClass.endsWith("/TimeBar;")

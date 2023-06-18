@@ -8,7 +8,7 @@ import org.jf.dexlib2.iface.instruction.NarrowLiteralInstruction
 
 object LegacyVideoAdsFingerprint : MethodFingerprint(
     returnType = "V",
-    access =  AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags =  AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf(),
     opcodes = listOf(
         Opcode.CONST_WIDE_16,

@@ -9,7 +9,7 @@ import org.jf.dexlib2.Opcode
 
 object TooltipContentViewFingerprint : MethodFingerprint(
     returnType = "V",
-    access = AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L"),
     customFingerprint = { methodDef, _ ->
         methodDef.implementation?.instructions?.any { instruction ->

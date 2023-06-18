@@ -6,7 +6,7 @@ import org.jf.dexlib2.AccessFlags
 
 object HideSnackbarFingerprint : MethodFingerprint(
     returnType = "V",
-    access = AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L", "L"),
     customFingerprint = { methodDef, _ -> methodDef.definingClass == "Lcom/google/android/apps/youtube/app/common/ui/bottomui/BottomUiContainer;" }
 )

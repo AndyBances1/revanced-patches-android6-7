@@ -7,7 +7,7 @@ import org.jf.dexlib2.Opcode
 
 object AppVersionFingerprint : MethodFingerprint(
     returnType = "L",
-    access = AccessFlags.PUBLIC or AccessFlags.STATIC,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.STATIC,
     parameters = listOf("L"),
     opcodes = listOf(
         Opcode.IGET_OBJECT,

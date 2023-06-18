@@ -8,7 +8,7 @@ import org.jf.dexlib2.iface.instruction.NarrowLiteralInstruction
 
 object SeekbarTappingFingerprint : MethodFingerprint(
     returnType = "Z",
-    access = AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L"),
     opcodes = listOf(
         Opcode.NEW_INSTANCE,

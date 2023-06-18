@@ -12,6 +12,6 @@ import org.jf.dexlib2.AccessFlags
 @Version("0.0.1")
 object InfocardsIncognitoParentFingerprint : MethodFingerprint(
     returnType = "Ljava/lang/String;",
-    access = AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     strings = listOf("player_overlay_info_card_teaser"),
 )

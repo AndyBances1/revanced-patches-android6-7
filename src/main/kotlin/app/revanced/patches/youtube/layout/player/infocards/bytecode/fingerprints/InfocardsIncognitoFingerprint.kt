@@ -12,6 +12,6 @@ import org.jf.dexlib2.AccessFlags
 @Version("0.0.1")
 object InfocardsIncognitoFingerprint : MethodFingerprint(
     returnType = "Ljava/lang/Boolean;",
-    access = AccessFlags.PUBLIC or AccessFlags.FINAL,
+    accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     strings = listOf("vibrator")
 )
