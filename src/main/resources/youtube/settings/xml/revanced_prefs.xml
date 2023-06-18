@@ -357,9 +357,8 @@
         <!-- SETTINGS: ENABLE_PROTOBUF_SPOOF
         <SwitchPreference android:title="@string/revanced_enable_protobuf_spoof_title" android:key="revanced_enable_protobuf_spoof" android:defaultValue="false" android:summary="@string/revanced_enable_protobuf_spoof_summary" />SETTINGS: ENABLE_PROTOBUF_SPOOF -->
         <!-- SETTINGS: SPOOF_APP_VERSION
-        <EditTextPreference android:title="@string/revanced_spoof_app_version_title" android:key="revanced_version_number_to_spoof" android:summary="@string/revanced_spoof_app_version_summary" android:defaultValue="" android:hint="18.05.40" android:inputType="text" />
-        <Preference android:summary="@string/revanced_spoof_app_version_details_1" />
-        <Preference android:summary="@string/revanced_spoof_app_version_details_2" />SETTINGS: SPOOF_APP_VERSION -->
+        <EditTextPreference android:title="@string/revanced_spoof_app_version_title" android:key="revanced_spoof_app_version_target" android:summary="@string/revanced_spoof_app_version_summary" android:defaultValue="" android:hint="17.30.34" android:inputType="text" />
+        <Preference android:title="@string/revanced_spoof_app_version_info_title" android:summary="@string/revanced_spoof_app_version_info_summary" android:key="revanced_spoof_app_version_info"/>SETTINGS: SPOOF_APP_VERSION -->
 
         <!-- SETTINGS: ABOUT
         <Preference android:title=" " android:selectable="false" android:summary="@string/pref_about_category" />
