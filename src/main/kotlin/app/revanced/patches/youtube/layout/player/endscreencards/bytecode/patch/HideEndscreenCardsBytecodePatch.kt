@@ -3,7 +3,7 @@ package app.revanced.patches.youtube.layout.player.endscreencards.bytecode.patch
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
@@ -30,7 +30,7 @@ class HideEndscreenCardsBytecodePatch : BytecodePatch(
             val layoutMethod = layoutResult.mutableMethod
 
             val checkCastIndex = layoutResult.scanResult.patternScanResult!!.endIndex
-            val viewRegister = (layoutMethod.instruction(checkCastIndex) as Instruction21c).registerA
+            val viewRegister = (layoutMethod.getInstruction(checkCastIndex) as Instruction21c).registerA
 
             layoutMethod.implementation!!.injectHideCall(checkCastIndex + 1, viewRegister, "layout/PlayerLayoutPatch", "hideEndscreen")
         }

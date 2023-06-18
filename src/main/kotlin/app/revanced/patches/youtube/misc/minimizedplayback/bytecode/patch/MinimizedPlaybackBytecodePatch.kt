@@ -4,8 +4,9 @@ import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.data.toMethodWalker
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -76,13 +77,13 @@ class MinimizedPlaybackBytecodePatch : BytecodePatch(
         }
 
         fun MutableMethod.hookPlaybackController() {
-            addInstructions(
+            addInstructionsWithLabels(
                 0, """
                     invoke-static {}, $INTEGRATIONS_PLAYBACK_METHOD_REFERENCE
                     move-result v0
                     if-eqz v0, :default
                     return-void
-                """, listOf(ExternalLabel("default", instruction(0)))
+                """, ExternalLabel("default", getInstruction(0))
             )
         }
     }

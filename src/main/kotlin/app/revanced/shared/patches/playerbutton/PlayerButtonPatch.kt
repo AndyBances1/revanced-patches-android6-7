@@ -3,8 +3,8 @@ package app.revanced.shared.patches.playerbutton
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -32,7 +32,7 @@ class PlayerButtonPatch : BytecodePatch(
 
         LiveChatFingerprint.result?.let {
             val endIndex = it.scanResult.patternScanResult!!.endIndex
-            val instuctions = it.mutableMethod.instruction(endIndex)
+            val instuctions = it.mutableMethod.getInstruction(endIndex)
             val imageButtonClass =
                 context
                 .findClass((instuctions as BuilderInstruction21c)

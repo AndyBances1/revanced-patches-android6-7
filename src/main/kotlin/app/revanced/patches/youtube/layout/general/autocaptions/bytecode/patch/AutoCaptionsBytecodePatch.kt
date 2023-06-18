@@ -3,8 +3,9 @@ package app.revanced.patches.youtube.layout.general.autocaptions.bytecode.patch
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
@@ -44,7 +45,7 @@ class AutoCaptionsBytecodePatch : BytecodePatch(
         }
 
         SubtitleTrackFingerprint.result?.mutableMethod?.let {
-            it.addInstructions(
+            it.addInstructionsWithLabels(
                 0, """
                     invoke-static {}, $GENERAL_LAYOUT->hideAutoCaptions()Z
                     move-result v0
@@ -53,7 +54,7 @@ class AutoCaptionsBytecodePatch : BytecodePatch(
                     if-nez v0, :auto_captions_shown
                     const/4 v0, 0x1
                     return v0
-                """, listOf(ExternalLabel("auto_captions_shown", it.instruction(0)))
+                """, ExternalLabel("auto_captions_shown", it.getInstruction(0))
             )
         } ?: return SubtitleTrackFingerprint.toErrorResult()
 

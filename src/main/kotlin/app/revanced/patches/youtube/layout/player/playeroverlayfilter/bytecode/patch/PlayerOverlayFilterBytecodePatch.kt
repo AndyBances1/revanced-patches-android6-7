@@ -3,8 +3,8 @@ package app.revanced.patches.youtube.layout.player.playeroverlayfilter.bytecode.
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.annotations.DependsOn
@@ -51,14 +51,14 @@ class PlayerOverlayFilterBytecodePatch : BytecodePatch() {
 
                                         val transparent = resourceIds[1]
 
-                                        mutableMethod.addInstructions(
+                                        mutableMethod.addInstructionsWithLabels(
                                             insertIndex + 1, """
                                                 invoke-static {}, Lapp/revanced/integrations/patches/layout/PlayerLayoutPatch;->hidePlayerOverlayFilter()Z
                                                 move-result v$dummyRegister
                                                 if-eqz v$dummyRegister, :currentcolor
                                                 const v$dummyRegister, $transparent
                                                 invoke-virtual {v$viewRegister, v$dummyRegister}, Landroid/widget/ImageView;->setImageResource(I)V
-                                            """, listOf(ExternalLabel("currentcolor", mutableMethod.instruction(insertIndex + 1)))
+                                            """, ExternalLabel("currentcolor", mutableMethod.getInstruction(insertIndex + 1))
                                         )
 
                                         patchSuccessArray[0] = true;

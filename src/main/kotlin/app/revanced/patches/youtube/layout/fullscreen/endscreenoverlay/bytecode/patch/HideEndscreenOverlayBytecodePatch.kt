@@ -3,8 +3,8 @@ package app.revanced.patches.youtube.layout.fullscreen.endscreenoverlay.bytecode
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.annotations.DependsOn
@@ -46,13 +46,13 @@ class HideEndscreenOverlayBytecodePatch : BytecodePatch() {
                                         val mutableMethod = context.proxy(classDef).mutableClass.findMutableMethodOf(method)
 
                                         val dummyRegister = (instructions.elementAt(index) as Instruction31i).registerA
-                                        mutableMethod.addInstructions(
+                                        mutableMethod.addInstructionsWithLabels(
                                             insertIndex, """
                                                 invoke-static {}, $FULLSCREEN_LAYOUT->hideEndscreenOverlay()Z
                                                 move-result v$dummyRegister
                                                 if-eqz v$dummyRegister, :on
                                                 return-void
-                                            """, listOf(ExternalLabel("on", mutableMethod.instruction(insertIndex)))
+                                            """, ExternalLabel("on", mutableMethod.getInstruction(insertIndex))
                                         )
 
                                         patchSuccessArray[0] = true;

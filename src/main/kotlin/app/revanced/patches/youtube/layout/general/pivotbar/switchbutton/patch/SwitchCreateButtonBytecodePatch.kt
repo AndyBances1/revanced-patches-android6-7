@@ -3,8 +3,8 @@ package app.revanced.patches.youtube.layout.general.pivotbar.switchbutton.patch
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -25,7 +25,7 @@ class SwitchCreateButtonBytecodePatch : BytecodePatch(
         AutoMotiveFingerprint.result?.let {
             with(it.mutableMethod) {
                 val insertIndex = it.scanResult.patternScanResult!!.endIndex
-                val register = (instruction(insertIndex) as OneRegisterInstruction).registerA
+                val register = (getInstruction(insertIndex) as OneRegisterInstruction).registerA
 
                 addInstructions(
                     insertIndex, """

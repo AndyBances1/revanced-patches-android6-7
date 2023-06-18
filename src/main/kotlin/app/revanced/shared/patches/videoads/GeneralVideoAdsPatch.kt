@@ -4,8 +4,9 @@ import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.data.toMethodWalker
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint.Companion.resolve
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
@@ -64,13 +65,13 @@ class GeneralVideoAdsPatch : BytecodePatch(
         fun injectMainstreamAds(
             descriptor: String
         ) {
-            MainstreamVideoAdsMethod.addInstructions(
+            MainstreamVideoAdsMethod.addInstructionsWithLabels(
                 InsertIndex, """
                     invoke-static {}, $descriptor
                     move-result v1
                     if-nez v1, :show_video_ads
                     return-void
-            """, listOf(ExternalLabel("show_video_ads", MainstreamVideoAdsMethod.instruction(InsertIndex)))
+            """, ExternalLabel("show_video_ads", MainstreamVideoAdsMethod.getInstruction(InsertIndex))
             )
         }
 

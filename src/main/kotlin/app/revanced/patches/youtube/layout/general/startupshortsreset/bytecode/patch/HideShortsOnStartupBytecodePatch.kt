@@ -3,8 +3,8 @@ package app.revanced.patches.youtube.layout.general.startupshortsreset.bytecode.
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
 import app.revanced.patcher.patch.PatchResultSuccess
@@ -29,14 +29,14 @@ class HideShortsOnStartupBytecodePatch : BytecodePatch(
             val insertIndex = it.scanResult.patternScanResult!!.endIndex + 1
 
             with (it.mutableMethod) {
-                val register = (instruction(insertIndex - 1) as OneRegisterInstruction).registerA + 2
-                addInstructions(
+                val register = (getInstruction(insertIndex - 1) as OneRegisterInstruction).registerA + 2
+                addInstructionsWithLabels(
                     insertIndex, """
                         invoke-static { }, $GENERAL_LAYOUT->hideStartupShortsPlayer()Z
                         move-result v$register
                         if-eqz v$register, :show_startup_shorts_player
                         return-void
-                    """, listOf(ExternalLabel("show_startup_shorts_player", instruction(insertIndex)))
+                    """, ExternalLabel("show_startup_shorts_player", getInstruction(insertIndex))
                 )
             }
         } ?: return UserWasInShortsFingerprint.toErrorResult()

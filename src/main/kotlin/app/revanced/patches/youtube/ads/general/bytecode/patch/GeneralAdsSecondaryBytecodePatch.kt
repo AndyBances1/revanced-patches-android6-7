@@ -3,8 +3,8 @@ package app.revanced.patches.youtube.ads.general.bytecode.patch
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Version
 import app.revanced.patcher.data.BytecodeContext
-import app.revanced.patcher.extensions.addInstructions
-import app.revanced.patcher.extensions.instruction
+import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
 import app.revanced.patcher.patch.annotations.DependsOn
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.PatchResult
@@ -127,13 +127,13 @@ class GeneralAdsSecondaryBytecodePatch : BytecodePatch() {
 	    viewRegister: Int,
 	    method: String
     ) {
-        addInstructions(
+        addInstructionsWithLabels(
             index + 1, """
                 invoke-static {}, $ADS_PATH/GeneralAdsPatch;->$method()Z
                 move-result v$dummyRegister
                 if-eqz v$dummyRegister, :shown
                 const v$viewRegister, 0x0
-            """, listOf(ExternalLabel("shown", this.instruction(index + 1)))
+            """, ExternalLabel("shown", this.getInstruction(index + 1))
         )
     }
 }
